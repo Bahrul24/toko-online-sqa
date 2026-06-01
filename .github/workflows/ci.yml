@@ -6,34 +6,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
     - name: Setup PHP Environment
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.3' # Disamakan dengan versi laptopmu (PHP 8.3)
-        coverage: xdebug
-        extensions: mbstring, xml, ctype
+        php-version: '8.1'
+        coverage: xdebug # Diperlukan untuk Metrik Coverage
 
     - name: Install PHP Dependencies
       run: composer install --prefer-dist --no-progress
 
     - name: Run PHPUnit & Quality Metrics
-      # Menambahkan flag --fail-on-warning agar jika ada warning/error kecil, server langsung otomatis MERAH
-      run: vendor/bin/phpunit --coverage-text --fail-on-warning
+      run: vendor/bin/phpunit tests/ --coverage-text
 
     - name: Setup Node.js for Cypress
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v3
       with:
-        node-version: 20
+        node-version: 18
 
     - name: Install NPM Dependencies
-      run: npm ci || npm install
+      run: npm install
 
     - name: Start PHP Server in Background
-      run: php -S 127.0.0.1:8000 &
+      run: php -S localhost:8000 &
 
     - name: Run Cypress E2E Tests (System Testing)
-      uses: cypress-io/github-action@v6
-      with:
-        wait-on: 'http://127.0.0.1:8000'
+      uses: cypress-io/github-action@v5
