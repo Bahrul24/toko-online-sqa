@@ -1,0 +1,14 @@
+[
+    {
+        "nama": "budi",
+        "email": "budi@gmail.com",
+        "password": "$2y$10$V0aVZXoUVuA6CT\/dtFWSu.jtBxPWX2NqEFMeNgZm2QbhDlnziFHha",
+        "role": "pelanggan"
+    },
+    {
+        "nama": "dimas",
+        "email": "dimas@gmail.com",
+        "password": "$2y$10$QC9x04KSvm7khsWbzdC6e.91MXRw7fUStyIDAwN684fSI5k9nPq9u",
+        "role": "admin"
+    }
+]
